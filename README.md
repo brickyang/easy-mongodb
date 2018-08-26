@@ -6,20 +6,20 @@
 [![Known Vulnerabilities][snyk-image]][snyk-url]
 [![npm download][download-image]][download-url]
 
-[npm-image]: https://img.shields.io/npm/v/@brick/easy-mongodb.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/@brick/easy-mongodb
-[quality-image]: http://npm.packagequality.com/shield/@brick/easy-mongodb.svg?style=flat-square
-[quality-url]: http://packagequality.com/#?package=@brick/easy-mongodb
-[travis-image]: https://img.shields.io/travis/brickyang/@brick/easy-mongodb.svg?branch=master&style=flat-square
-[travis-url]: https://travis-ci.org/brickyang/@brick/easy-mongodb
-[codecov-image]: https://img.shields.io/codecov/c/github/brickyang/@brick/easy-mongodb.svg?style=flat-square
-[codecov-url]: https://codecov.io/github/brickyang/@brick/easy-mongodb?branch=master
-[david-image]: https://img.shields.io/david/brickyang/@brick/easy-mongodb.svg?branch=master&style=flat-square
-[david-url]: https://david-dm.org/brickyang/@brick/easy-mongodb?branch=master
-[snyk-image]: https://snyk.io/test/npm/@brick/easy-mongodb/badge.svg?style=flat-square
-[snyk-url]: https://snyk.io/test/npm/@brick/easy-mongodb
-[download-image]: https://img.shields.io/npm/dm/@brick/easy-mongodb.svg?style=flat-square
-[download-url]: https://npmjs.org/package/@brick/easy-mongodb
+[npm-image]: https://img.shields.io/npm/v/@brickyang/easy-mongodb.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/@brickyang/easy-mongodb
+[quality-image]: http://npm.packagequality.com/shield/@brickyang/easy-mongodb.svg?style=flat-square
+[quality-url]: http://packagequality.com/#?package=@brickyang/easy-mongodb
+[travis-image]: https://img.shields.io/travis/brickyang/@brickyang/easy-mongodb.svg?branch=master&style=flat-square
+[travis-url]: https://travis-ci.org/brickyang/@brickyang/easy-mongodb
+[codecov-image]: https://img.shields.io/codecov/c/github/brickyang/@brickyang/easy-mongodb.svg?style=flat-square
+[codecov-url]: https://codecov.io/github/brickyang/@brickyang/easy-mongodb?branch=master
+[david-image]: https://img.shields.io/david/brickyang/@brickyang/easy-mongodb.svg?branch=master&style=flat-square
+[david-url]: https://david-dm.org/brickyang/@brickyang/easy-mongodb?branch=master
+[snyk-image]: https://snyk.io/test/npm/@brickyang/easy-mongodb/badge.svg?style=flat-square
+[snyk-url]: https://snyk.io/test/npm/@brickyang/easy-mongodb
+[download-image]: https://img.shields.io/npm/dm/@brickyang/easy-mongodb.svg?style=flat-square
+[download-url]: https://npmjs.org/package/@brickyang/easy-mongodb
 
 This lib base on
 [node-mongodb-native](https://github.com/mongodb/node-mongodb-native), provides
@@ -47,7 +47,7 @@ mongo.find('name', { query, skip, limit, project, sort, options });
 ## Installation
 
 ```bash
-npm install --save @brick/easy-mongodb
+npm install --save @brickyang/easy-mongodb
 ```
 
 ## Configuration
@@ -88,7 +88,7 @@ const config = {
 ## Usage
 
 ```js
-const MongoDB = require('@brick/easy-mongodb');
+const MongoDB = require('@brickyang/easy-mongodb');
 
 const mongo = new MongoDB(config);
 

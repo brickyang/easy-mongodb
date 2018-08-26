@@ -1,5 +1,5 @@
 {
-  "name": "@brick/easy-mongodb",
+  "name": "@brickyang/easy-mongodb",
   "version": "1.0.0",
   "description": "Based on MongoDB Native Node.js Driver.",
   "main": "index.js",
