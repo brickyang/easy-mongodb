@@ -1,0 +1,34 @@
+{
+  "name": "@brick/easy-mongodb",
+  "version": "1.0.0",
+  "description": "Based on MongoDB Native Node.js Driver.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run lint && npm run cov",
+    "test-local": "mocha",
+    "cov": "nyc mocha",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@types/mongodb": "^3.1.4",
+    "mongodb": "^3.1.4"
+  },
+  "devDependencies": {
+    "eslint": "^5.4.0",
+    "mocha": "^5.2.0",
+    "nyc": "^12.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com:brickyang/easy-mongodb.git"
+  },
+  "keywords": [
+    "mongodb"
+  ],
+  "author": "Brick",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brickyang/easy-mongodb/issues"
+  },
+  "homepage": "https://github.com/brickyang/easy-mongodb#readme"
+}
