@@ -10,13 +10,13 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@types/mongodb": "^3.1.4",
-    "mongodb": "^3.1.4"
+    "@types/mongodb": "^3.1.18",
+    "mongodb": "^3.1.10"
   },
   "devDependencies": {
-    "eslint": "^5.4.0",
+    "eslint": "^5.12.0",
     "mocha": "^5.2.0",
-    "nyc": "^12.0.2"
+    "nyc": "^13.1.0"
   },
   "repository": {
     "type": "git",

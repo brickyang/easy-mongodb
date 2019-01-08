@@ -1,0 +1,14 @@
+{
+  "git.ignoreLimitWarning": true,
+  "files.exclude": {
+    "USE_GITIGNORE": true,
+    "run": true,
+    "logs": true,
+    "out": true,
+    "node_modules": true,
+    "coverage": true,
+    "doc": true
+  },
+  "prettier.eslintIntegration": true,
+  "prettier.singleQuote": true
+}
