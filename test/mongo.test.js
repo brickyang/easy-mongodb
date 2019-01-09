@@ -11,7 +11,7 @@ describe('test/mongo.test.js', () => {
     NAME = 'test';
     config = {
       host: 'localhost',
-      port: 27017,
+      port: 27019,
       name: 'test',
     };
     mongo = new MongoDB(config);
@@ -851,9 +851,23 @@ describe('test/mongo.test.js', () => {
   });
 
   describe('startTransaction()', () => {
-    it('should OK', () => {
+    it('should OK with MongoDB 4.0 above', () => {
+      if (version < 3.6) return;
+
       const sess = mongo.startTransaction();
       assert.ok(sess.inTransaction());
+    });
+
+    it('should error with MongoDB under 4.0', () => {
+      if (version >= 4) return;
+
+      assert.throws(() => {
+        try {
+          mongo.startTransaction();
+        } catch (error) {
+          throw error;
+        }
+      }, Error);
     });
   });
 });
