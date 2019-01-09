@@ -852,7 +852,7 @@ describe('test/mongo.test.js', () => {
 
   describe('startTransaction()', () => {
     it('should OK with MongoDB 4.0 above', () => {
-      if (version < 3.6) return;
+      if (version < 4) return;
 
       const sess = mongo.startTransaction();
       assert.ok(sess.inTransaction());
