@@ -20,6 +20,11 @@ import {
   MongoCountPreferences,
   ReadPreference,
   UpdateWriteOpResult,
+  MongoClient,
+  FindOneOptions,
+  SessionOptions,
+  ClientSession,
+  TransactionOptions,
 } from 'mongodb';
 
 export { ObjectId, ObjectID } from 'mongodb';
@@ -30,7 +35,9 @@ declare class MongoDB {
   private url: string;
   private clientOptions: MongoClientOptions;
   public db: Db;
+  public client: MongoClient;
   public config: IMongoConfig;
+  public featureCompatibilityVersion: string;
 
   constructor(config: IMongoConfig);
 
@@ -45,6 +52,11 @@ declare class MongoDB {
     name: string,
     args?: { docs: Object[]; options?: CollectionInsertManyOptions }
   ): Promise<InsertWriteOpResult>;
+
+  public findOne<T = Default>(
+    name: string,
+    args: { query: object; options?: FindOneOptions }
+  ): Promise<T | null>;
 
   public findOneAndUpdate<T = Default>(
     name: string,
@@ -158,6 +170,12 @@ declare class MongoDB {
     name: string,
     args: { pipeline: any[]; options?: CollectionAggregationOptions }
   ): Promise<T[]>;
+
+  public startSession(args?: { options?: SessionOptions }): ClientSession;
+
+  public startTransaction(args?: {
+    options?: TransactionOptions;
+  }): ClientSession;
 }
 
 export default MongoDB;
@@ -169,10 +187,4 @@ interface IMongoConfig {
   user?: string;
   password?: string;
   options?: MongoClientOptions;
-}
-
-declare class ClientSession extends EventEmitter {
-  endSession(callback?: MongoCallback<void>): void;
-  endSession(options: any, callback?: MongoCallback<void>): void;
-  equals(session: ClientSession): boolean;
 }
