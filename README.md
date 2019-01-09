@@ -21,6 +21,8 @@
 [download-image]: https://img.shields.io/npm/dm/@brickyang/easy-mongodb.svg?style=flat-square
 [download-url]: https://npmjs.org/package/@brickyang/easy-mongodb
 
+[**中文版**](https://github.com/brickyang/easy-mongodb/blob/master/README.zh_CN.md)
+
 This lib base on
 [node-mongodb-native](https://github.com/mongodb/node-mongodb-native), provides
 the official MongoDB native driver and APIs.
@@ -43,6 +45,8 @@ and with this lib
 ```js
 mongo.find('name', { query, skip, limit, project, sort, options });
 ```
+
+If you are using Egg.js, please see [egg-mongo-native](https://github.com/brickyang/egg-mongo-native).
 
 ## Installation
 
@@ -87,11 +91,16 @@ const config = {
 
 ## Usage
 
+The APIs provided by this lib usually need two arguments. The first is commonly
+the collection name, and the second is an object keeps the arguments of official
+API.
+
 ```js
 const MongoDB = require('@brickyang/easy-mongodb');
 
 const mongo = new MongoDB(config);
 
+// connection
 mongo
   .connect()
   .then(client => {
@@ -110,46 +119,51 @@ mongo.on('connect', () => {
 mongo.on('error', error => {
   // handle error
 });
-```
 
-## Example
-
-APIs provided by this lib usually need two arguments. The first is commonly
-the collection name, and the second is an object keeps the arguments of official
-API. For example, to insert one document using official API
-
-```js
-db.collection('name').insertOne(doc, options);
-```
-
-and using lib API
-
-```js
+// insert one doc
 const args = { doc, options };
-mongo.insertOne('name', args);
+mongo.insertOne('collection', args);
+
+// transaction
+const session = mongo.startTransaction();
+const args = { doc, { session } };
+mongo.insertOne('collection1', args);
+mongo.insertOne('collection2', args);
+session.commitTransaction();
 ```
 
-## Methods
+## Members
+
+- **db**: Db instance
+- **client**: MongoClient instance
+- **featureCompatibilityVersion**: Transaction need '4.0' or above
+
+## API
 
 Until now, this plugin provides these functions:
 
 - **connect**
 - **insertOne**
 - **insertMany**
+- **findOne**
 - **findOneAndUpdate**
 - **findOneAndReplace**
 - **findOneAndDelete**
 - **updateMany**
 - **deleteMany**
 - **find**
-- **count**
+- **count**: 已过时
+- **countDocuments**
+- **estimatedDocumentCount**
 - **distinct**
 - **createIndex**
 - **listCollection**
 - **createCollection**
 - **aggregate**
+- **startSession**
+- **startTransaction**
 
-You can always use `mongo.db` to use all official APIs. Check the
+You can always use `mongo.db` and `mongo.client` to use all official APIs. Check the
 APIs here:
 [Node.js MongoDB Driver API](https://mongodb.github.io/node-mongodb-native/3.1/api/).
 
