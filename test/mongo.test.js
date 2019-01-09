@@ -31,27 +31,6 @@ describe('test/mongo.test.js', () => {
     });
   });
 
-  describe('startSession()', () => {
-    it('should OK with MongoDB 3.6 above', () => {
-      if (version < 3.6) return;
-
-      const session = mongo.startSession();
-      assert.equal(session.constructor.name, 'ClientSession');
-    });
-
-    it('should error with MongoDB under 3.6', () => {
-      if (version >= 3.6) return;
-
-      assert.throws(() => {
-        try {
-          mongo.startSession();
-        } catch (error) {
-          throw error;
-        }
-      }, Error);
-    });
-  });
-
   describe('insertOne()', () => {
     it('should success', async () => {
       const doc = { title: 'new doc' };
@@ -847,6 +826,34 @@ describe('test/mongo.test.js', () => {
       } catch (error) {
         assert(error);
       }
+    });
+  });
+
+  describe('startSession()', () => {
+    it('should OK with MongoDB 3.6 above', () => {
+      if (version < 3.6) return;
+
+      const session = mongo.startSession();
+      assert.equal(session.constructor.name, 'ClientSession');
+    });
+
+    it('should error with MongoDB under 3.6', () => {
+      if (version >= 3.6) return;
+
+      assert.throws(() => {
+        try {
+          mongo.startSession();
+        } catch (error) {
+          throw error;
+        }
+      }, Error);
+    });
+  });
+
+  describe('startTransaction()', () => {
+    it('should OK', () => {
+      const sess = mongo.startTransaction();
+      assert.ok(sess.inTransaction());
     });
   });
 });
