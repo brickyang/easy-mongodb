@@ -6,6 +6,7 @@ describe('test/mongo.test.js', () => {
   let NAME;
   let config;
   let mongo;
+  let version;
   before(async () => {
     NAME = 'test';
     config = {
@@ -15,6 +16,7 @@ describe('test/mongo.test.js', () => {
     };
     mongo = new MongoDB(config);
     await mongo.connect();
+    version = parseFloat(mongo.featureCompatibilityVersion);
   });
 
   afterEach(async () => await mongo.deleteMany(NAME, { filter: {} }));
@@ -30,9 +32,23 @@ describe('test/mongo.test.js', () => {
   });
 
   describe('startSession()', () => {
-    it('should start session', () => {
+    it('should OK with MongoDB 3.6 above', () => {
+      if (version < 3.6) return;
+
       const session = mongo.startSession();
       assert.equal(session.constructor.name, 'ClientSession');
+    });
+
+    it('should error with MongoDB under 3.6', () => {
+      if (version >= 3.6) return;
+
+      assert.throws(() => {
+        try {
+          mongo.startSession();
+        } catch (error) {
+          throw error;
+        }
+      }, Error);
     });
   });
 
