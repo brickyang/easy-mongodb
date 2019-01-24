@@ -18,17 +18,22 @@
     "mocha": "^5.2.0",
     "nyc": "^13.1.0"
   },
+  "files": [
+    "lib",
+    "index.js",
+    "index.d.ts"
+  ],
+  "keywords": [
+    "mongodb"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com:brickyang/easy-mongodb.git"
   },
-  "keywords": [
-    "mongodb"
-  ],
-  "author": "Brick",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/brickyang/easy-mongodb/issues"
   },
-  "homepage": "https://github.com/brickyang/easy-mongodb#readme"
+  "homepage": "https://github.com/brickyang/easy-mongodb#readme",
+  "author": "Brick",
+  "license": "MIT"
 }
