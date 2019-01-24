@@ -1,4 +1,4 @@
-import EventEmitter from 'events';
+import * as EventEmitter from 'events';
 import {
   Collection,
   CollectionAggregationOptions,
@@ -21,7 +21,6 @@ import {
   ReadPreference,
   UpdateWriteOpResult,
   MongoClient,
-  FindOneOptions,
   SessionOptions,
   ClientSession,
   TransactionOptions,
@@ -32,25 +31,27 @@ export { ObjectId, ObjectID } from 'mongodb';
 type Default = any;
 
 declare class MongoDB {
+  public config: IMongoConfig;
   private url: string;
   private clientOptions: MongoClientOptions;
   public db: Db;
   public client: MongoClient;
-  public config: IMongoConfig;
   public featureCompatibilityVersion: string;
 
   constructor(config: IMongoConfig);
 
-  public connect(url: string): Promise<Db>;
+  public connect(): Promise<MongoClient>;
+
+  public close(): Promise<void>;
 
   public insertOne(
     name: string,
-    args?: { doc: Object; options?: CollectionInsertOneOptions }
+    args: { doc: Object; options?: CollectionInsertOneOptions }
   ): Promise<InsertOneWriteOpResult>;
 
   public insertMany(
     name: string,
-    args?: { docs: Object[]; options?: CollectionInsertManyOptions }
+    args: { docs: Object[]; options?: CollectionInsertManyOptions }
   ): Promise<InsertWriteOpResult>;
 
   public findOne<T = Default>(
@@ -114,7 +115,7 @@ declare class MongoDB {
       sort?: { [key: string]: number };
       options?: FindOneOptions;
     },
-    returnCursor: boolean
+    returnCursor: true
   ): Promise<Cursor<T>>;
 
   public find<T = Default>(
@@ -127,9 +128,13 @@ declare class MongoDB {
       project?: any;
       sort?: { [key: string]: number };
       options?: FindOneOptions;
-    }
+    },
+    returnCursor?: boolean
   ): Promise<T[]>;
 
+  /**
+   * @deprecated Use `countDocuments` or `estimatedDocumentCount` instead
+   */
   public count(
     name: string,
     args?: {
@@ -138,7 +143,23 @@ declare class MongoDB {
     }
   ): Promise<number>;
 
-  public distinct(
+  public countDocuments(
+    name: string,
+    args: {
+      query?: any;
+      options?: MongoCountPreferences;
+    }
+  ): Promise<number>;
+
+  public estimatedDocumentCount(
+    name: string,
+    args?: {
+      query?: any;
+      options?: MongoCountPreferences;
+    }
+  ): Promise<number>;
+
+  public distinct<T = Default>(
     name: string,
     args: {
       key: string;
@@ -149,7 +170,7 @@ declare class MongoDB {
         session?: ClientSession;
       };
     }
-  ): Promise<any[]>;
+  ): Promise<T[]>;
 
   public createIndex(
     name: string,
