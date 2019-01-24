@@ -22,10 +22,9 @@ describe('test/mongo.test.js', () => {
       getParameter: 1,
       featureCompatibilityVersion: 1,
     });
-    version = parseFloat(featureCompatibilityVersion);
-
-    /*eslint no-console: 0 */
-    console.log(version);
+    version = parseFloat(
+      featureCompatibilityVersion.version || featureCompatibilityVersion
+    );
   });
 
   afterEach(async () => await mongo.deleteMany(NAME, { filter: {} }));
@@ -844,18 +843,6 @@ describe('test/mongo.test.js', () => {
       const session = mongo.startSession();
       assert.equal(session.constructor.name, 'ClientSession');
     });
-
-    it('should error with MongoDB under 3.6', () => {
-      if (version >= 3.6) return;
-
-      assert.throws(() => {
-        try {
-          mongo.startSession();
-        } catch (error) {
-          throw error;
-        }
-      }, Error);
-    });
   });
 
   describe('startTransaction()', () => {
@@ -864,18 +851,6 @@ describe('test/mongo.test.js', () => {
 
       const sess = mongo.startTransaction();
       assert.ok(sess.inTransaction());
-    });
-
-    it('should error with MongoDB under 4.0', () => {
-      if (version >= 4) return;
-
-      assert.throws(() => {
-        try {
-          mongo.startTransaction();
-        } catch (error) {
-          throw error;
-        }
-      }, Error);
     });
   });
 });
