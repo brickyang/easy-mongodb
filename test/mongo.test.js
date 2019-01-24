@@ -11,12 +11,21 @@ describe('test/mongo.test.js', () => {
     NAME = 'test';
     config = {
       host: 'localhost',
-      port: 27017,
+      port: 27019,
       name: 'test',
     };
     mongo = new MongoDB(config);
     await mongo.connect();
-    version = parseFloat(mongo.featureCompatibilityVersion);
+    const {
+      featureCompatibilityVersion,
+    } = await mongo.db.executeDbAdminCommand({
+      getParameter: 1,
+      featureCompatibilityVersion: 1,
+    });
+    version = parseFloat(featureCompatibilityVersion);
+
+    /*eslint no-console: 0 */
+    console.log(version);
   });
 
   afterEach(async () => await mongo.deleteMany(NAME, { filter: {} }));
@@ -26,7 +35,6 @@ describe('test/mongo.test.js', () => {
     it('should OK', async () => {
       mongo.on('connect', () => {
         assert.ok(mongo.client.isConnected());
-        assert.equal(typeof mongo.featureCompatibilityVersion, 'string');
       });
     });
   });
