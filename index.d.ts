@@ -1,4 +1,4 @@
-import EventEmitter from 'events';
+import * as EventEmitter from 'events';
 import {
   Collection,
   CollectionAggregationOptions,
@@ -21,7 +21,6 @@ import {
   ReadPreference,
   UpdateWriteOpResult,
   MongoClient,
-  FindOneOptions,
   SessionOptions,
   ClientSession,
   TransactionOptions,
@@ -41,7 +40,7 @@ declare class MongoDB {
 
   constructor(config: IMongoConfig);
 
-  public connect(url: string): Promise<Db>;
+  public connect(): Promise<Db>;
 
   public insertOne(
     name: string,
@@ -138,7 +137,7 @@ declare class MongoDB {
     }
   ): Promise<number>;
 
-  public distinct(
+  public distinct<T = Default>(
     name: string,
     args: {
       key: string;
@@ -149,7 +148,7 @@ declare class MongoDB {
         session?: ClientSession;
       };
     }
-  ): Promise<any[]>;
+  ): Promise<T[]>;
 
   public createIndex(
     name: string,
