@@ -11,7 +11,7 @@ describe('test/mongo.test.js', () => {
     NAME = 'test';
     config = {
       host: 'localhost',
-      port: 27019,
+      port: 27017,
       name: 'test',
     };
     mongo = new MongoDB(config);
