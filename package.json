@@ -1,6 +1,6 @@
 {
   "name": "@brickyang/easy-mongodb",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Based on MongoDB Native Node.js Driver.",
   "main": "index.js",
   "scripts": {
