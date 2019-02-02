@@ -1,5 +1,5 @@
 const { ObjectID } = require('mongodb');
-const MongoDB = require('../index');
+const MongoDB = require('../index').default;
 const assert = require('assert');
 
 describe('test/mongo.test.js', () => {

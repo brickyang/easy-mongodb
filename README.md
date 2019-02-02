@@ -96,7 +96,10 @@ the collection name, and the second is an object keeps the arguments of official
 API.
 
 ```js
-const MongoDB = require('@brickyang/easy-mongodb');
+// TypeScript
+// import MongoDB from '@brickyang/easy-mongodb';
+
+const MongoDB = require('@brickyang/easy-mongodb').default;
 
 const mongo = new MongoDB(config);
 
