@@ -95,7 +95,10 @@ const config = {
 本插件提供的 API 只是对原版 API 进行了必要的简化，所有属性名称与原版 API 一致。所有针对文档操作的 API，通常接受 2 个参数，第一个参数是 collection 名称，第二个参数是一个对象，属性名即为原版 API 的所有参数。例如，使用原版 API 进行一次插入
 
 ```js
-const MongoDB = require('@brickyang/easy-mongodb');
+// TypeScript
+// import MongoDB from '@brickyang/easy-mongodb';
+
+const MongoDB = require('@brickyang/easy-mongodb').default;
 
 const mongo = new MongoDB(config);
 
