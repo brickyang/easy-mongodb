@@ -742,7 +742,7 @@ describe('test/mongo.test.js', () => {
       } catch (error) {
         assert.equal(
           error.message,
-          '"key" had the wrong type. Expected string, found null'
+          "BSON field 'distinct.key' is missing but a required field"
         );
       }
     });
